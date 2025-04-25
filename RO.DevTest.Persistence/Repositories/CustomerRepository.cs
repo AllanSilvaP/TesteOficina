@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using RO.DevTest.Application.Interfaces;
-using RO.DevTest.Domain.Entities;
 
 namespace RO.DevTest.Persistence.Repositories;
 

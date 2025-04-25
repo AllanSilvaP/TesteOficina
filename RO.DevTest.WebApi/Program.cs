@@ -10,11 +10,18 @@ namespace RO.DevTest.WebApi;
 
 public class Program {
     public static void Main(string[] args) {
-        var builder = WebApplication.CreateBuilder(args);
 
+        var builder = WebApplication.CreateBuilder(args);
+        //CONFIG DB
         builder.Services.AddDbContext<AppDbContext>(options =>
         options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+        //REPOSITORYS
         builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+        builder.Services.AddScoped<IProductRepository, ProductRepository>();
+        builder.Services.AddScoped<ISaleRepository, SaleRepository>();
+        builder.Services.AddScoped<ISaleItemRepository, SaleItemRepository>();
+
+        //DEFAULT
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
@@ -31,7 +38,7 @@ public class Program {
             );
         });
 
-        Console.WriteLine("🔒 Connection: " + builder.Configuration.GetConnectionString("DefaultConnection"));
+        //Console.WriteLine("🔒 Connection: " + builder.Configuration.GetConnectionString("DefaultConnection"));
 
         var app = builder.Build();
 
