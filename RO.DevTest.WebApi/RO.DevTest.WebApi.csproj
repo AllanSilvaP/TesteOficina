@@ -20,5 +20,6 @@
     <ProjectReference Include="..\RO.DevTest.Application\RO.DevTest.Application.csproj" />
     <ProjectReference Include="..\RO.DevTest.Infrastructure\RO.DevTest.Infrastructure.csproj" />
     <ProjectReference Include="..\RO.DevTest.Persistence\RO.DevTest.Persistence.csproj" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.4" />
   </ItemGroup>
 </Project>
