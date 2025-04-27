@@ -28,7 +28,7 @@ public class AuthController(IMediator mediator, AppDbContext context, IConfigura
 
     [HttpPost("login")]
     [AllowAnonymous]
-    public async Task<IActionResult> Login([FromBody] LoginRequest request)
+    public async Task<IActionResult> Login(string v, [FromBody] LoginRequest request)
     {
         var customer = await _context.Customers.FirstOrDefaultAsync(c => c.Email == request.Email);
 
