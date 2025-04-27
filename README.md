@@ -29,11 +29,11 @@ Este projeto é uma API completa de e-commerce desenvolvida para o teste técnic
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seu-usuario/seu-repo.git
+   git clone https://github.com/AllanSilvaP/TesteOficina
 
-2. Acesse a pasta do projeto:
+2. Acesse a pasta do projeto (COLOCAR NOME DO SEU DIRETORIO!):
    ```bash
-   cd rota-das-oficinas-api
+   cd rota-das-oficinas-api 
    ```
 
 3. Restaure os pacotes:
