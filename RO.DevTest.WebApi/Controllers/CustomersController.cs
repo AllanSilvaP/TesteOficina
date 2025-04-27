@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using RO.DevTest.Application.Interfaces;
 using RO.DevTest.Domain.Entities;
@@ -25,6 +26,8 @@ public class CustomersController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create(Customer customer)
     {
+        var hasher = new PasswordHasher<Customer>();
+        customer.PasswordHash = hasher.HashPassword(customer, customer.PasswordHash);
         await _repository.AddAsync(customer);
         return CreatedAtAction(nameof(GetById), new { id = customer.Id }, customer);
     }
