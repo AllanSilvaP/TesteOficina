@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Identity;
 using Namotion.Reflection;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace RO.DevTest.WebApi.Controllers;
@@ -26,6 +27,7 @@ public class AuthController(IMediator mediator, AppDbContext context, IConfigura
     private readonly IConfiguration _configuration = configuration;
 
     [HttpPost("login")]
+    [AllowAnonymous]
     public async Task<IActionResult> Login([FromBody] LoginRequest request)
     {
         var customer = await _context.Customers.FirstOrDefaultAsync(c => c.Email == request.Email);

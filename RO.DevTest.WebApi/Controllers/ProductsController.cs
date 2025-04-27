@@ -1,12 +1,14 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RO.DevTest.Application.Interfaces;
+using RO.DevTest.Domain.Entities;
 
 namespace RO.DevTest.WebApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-
-public class ProductsController : ControllerBase {
+public class ProductsController : ControllerBase
+{
     private readonly IProductRepository _repository;
 
     public ProductsController(IProductRepository repository) => _repository = repository;
@@ -21,6 +23,7 @@ public class ProductsController : ControllerBase {
         return product is null ? NotFound() : Ok(product);
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<IActionResult> Create(Product product)
     {
@@ -28,6 +31,7 @@ public class ProductsController : ControllerBase {
         return CreatedAtAction(nameof(GetById), new { id = product.Id }, product);
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(Guid id, Product product)
     {
@@ -39,6 +43,7 @@ public class ProductsController : ControllerBase {
         return NoContent();
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(Guid id)
     {
