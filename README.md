@@ -1,21 +1,81 @@
-# Rota das Oficinas Tecnical Test
-This project is the template to be used to create a basic e-commerce Web API.
-It already contains the basic structure of a API, that must be followed when adding more features.
+# 🛒 Rota das Oficinas — E-commerce Web API
 
-Some caracteristics of this template that  are:
+Este projeto é uma API completa de e-commerce desenvolvida para o teste técnico da **Rota das Oficinas**.
 
-- Built using .NET 8.0
-- Uses EntityFramework Core as it's ORM
-- Follows the [CQRS Pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs) and [Repository Pattern](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design)
-- Uses PostgreSql as it's database engine
-- Uses Xunit, Bogus and FluentAssertions to create tests
+---
 
-## To Dos in the Project
-In the template there are some left unfinnished features that you must do to correctly create the API. Search **[TODO]**  to find theses features.
+## ✨ Tecnologias Utilizadas
 
-## Feel Free to Optimize or Refactor
-If you find some code that you think can be enhanced, feel free to refactor it. But the refactor should follow the patterns of the project. Also the refactor should be separeted onn it's own commit.
+- **.NET 8.0** — Plataforma principal
+- **Entity Framework Core** — ORM para persistência de dados
+- **PostgreSQL** — Banco de dados relacional
+- **CQRS Pattern** — Separação de leitura e escrita
+- **Repository Pattern** — Abstração de acesso a dados
+- **Xunit** + **Bogus** + **FluentAssertions** — Testes automatizados
 
-## Creating a FrontEnd
-When creating the frontend you can choose any framework you want, but your application must connect with the Web API via HTTP requests, and it's code must be in the same repository as the Web API.
+---
 
+## 📋 Funcionalidades Implementadas
+
+- Cadastro, atualização, consulta e remoção de produtos
+- Integração completa com banco de dados PostgreSQL
+- Ambiente de testes com cobertura para unidades e integração
+- Padrão CQRS para comandos e queries
+- Padrão Repository para acesso a dados desacoplado
+
+---
+
+## 🚀 Como rodar o projeto
+
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/seu-usuario/seu-repo.git
+
+2. Acesse a pasta do projeto:
+   ```bash
+   cd rota-das-oficinas-api
+   ```
+
+3. Restaure os pacotes:
+   ```bash
+   dotnet restore
+   ```
+
+4. Atualize o banco de dados (Lembre-se do migrations antes):
+   ```bash
+   dotnet ef database update
+   ```
+
+5. Inicie a aplicação:
+   ```bash
+   dotnet run
+   ```
+
+A API ficará disponível! caso esteja desenvolvendo recomendo usar o swager
+
+---
+
+## 🧪 Como rodar os testes
+
+Para executar todos os testes automatizados:
+
+```bash
+dotnet test
+```
+
+
+---
+
+## 📚 Referências
+
+- [Documentação CQRS (Microsoft)](https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs)
+- [Repository Pattern (Microsoft)](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design)
+- [Entity Framework Core Docs](https://learn.microsoft.com/en-us/ef/core/)
+
+---
+
+## 👨‍💻 Autor
+
+Desenvolvido por Allan da Silva.  
+Teste técnico para a **Rota das Oficinas**.
+```
