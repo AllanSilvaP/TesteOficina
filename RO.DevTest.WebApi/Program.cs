@@ -34,7 +34,7 @@ public class Program
 {
     c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
     {
-        Description = "JWT Authorization header usando Bearer. Exemplo: \"Authorization: Bearer {token}\"",
+        Description = "JWT Authorization header using Bearer. Examplee: \"Authorization: Bearer {token}\"",
         Name = "Authorization",
         In = Microsoft.OpenApi.Models.ParameterLocation.Header,
         Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey,

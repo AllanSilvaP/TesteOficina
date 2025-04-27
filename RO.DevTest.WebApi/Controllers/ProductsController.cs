@@ -14,7 +14,15 @@ public class ProductsController : ControllerBase
     public ProductsController(IProductRepository repository) => _repository = repository;
 
     [HttpGet]
-    public async Task<IActionResult> Get() => Ok(await _repository.GetAllAsync());
+    public async Task<IActionResult> Get([FromQuery] int pageNumber = 1,[FromQuery] int pageSize = 10) {
+        var products = await _repository.GetAllAsync();
+        var paged = products
+        .Skip((pageNumber - 1) * pageSize)
+        .Take(pageSize)
+        .ToList();
+
+        return Ok(paged);
+    } 
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(Guid id)

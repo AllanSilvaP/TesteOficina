@@ -5,4 +5,6 @@ public class Sale
     public Customer Customer { get; set; }
     public DateTime SaleDate { get; set; }
     public decimal TotalAmount { get; set; }
+
+    public ICollection<SaleItem> saleItems {get; set;} = new List<SaleItem>();
 }

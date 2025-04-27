@@ -17,7 +17,15 @@ public class CustomersController : ControllerBase
 
     [Authorize(Roles = "Admin")]
     [HttpGet]
-    public async Task<IActionResult> Get() => Ok(await _repository.GetAllAsync());
+    public async Task<IActionResult> Get([FromQuery] int pageNumber = 1,[FromQuery] int pageSize = 10) {
+        var customers = await _repository.GetAllAsync();
+        var paged = customers
+        .Skip((pageNumber - 1) * pageSize)
+        .Take(pageSize)
+        .ToList();
+
+        return Ok(paged);
+    } 
 
     [Authorize]
     [HttpGet("{id}")]

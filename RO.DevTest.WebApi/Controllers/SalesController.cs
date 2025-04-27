@@ -18,18 +18,24 @@ public class SalesController : ControllerBase
 
     [Authorize]
     [HttpGet]
-    public async Task<IActionResult> Get()
+    public async Task<IActionResult> Get(
+    [FromQuery] int pageNumber = 1,
+    [FromQuery] int pageSize = 10)
     {
-        if (IsAdmin())
+        var sales = await _repository.GetAllAsync();
+
+        if (!IsAdmin())
         {
-            return Ok(await _repository.GetAllAsync());
+            var customerId = GetUserId();
+            sales = sales.Where(s => s.CustomerId.ToString() == customerId).ToList();
         }
 
-        var customerId = GetUserId();
-        var allSales = await _repository.GetAllAsync();
-        var customerSales = allSales.Where(s => s.CustomerId.ToString() == customerId);
+        var pagedSales = sales
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
 
-        return Ok(customerSales);
+        return Ok(pagedSales);
     }
 
     [Authorize]
@@ -73,6 +79,40 @@ public class SalesController : ControllerBase
     {
         await _repository.DeleteAsync(id);
         return NoContent();
+    }
+
+    //DATA
+
+    [Authorize(Roles = "Admin")]
+    [HttpGet("analytics")]
+    public async Task<IActionResult> GetSalesAnalytics([FromQuery] DateTime startDate, [FromQuery] DateTime endDate) {
+        var sales = await _repository.GetAllAsync();
+
+        var filteredSales = sales.Where(s => s.SaleDate >= startDate && s.SaleDate <= endDate);
+
+        var totalSales = filteredSales.Count();
+        var totalRevenue = filteredSales.Sum(s => s.TotalAmount);
+
+        var saleItems = filteredSales
+        .SelectMany(s => s.saleItems)
+        .ToList();
+
+        var productRevenue = saleItems
+        .GroupBy(i => new {i.ProductId, i.Product.Name})
+        .Select(g => new {
+            ProductId = g.Key.Name,
+            ProductName = g.Key.Name,
+            TotalRevenue = g.Sum(x => x.UnitPrice * x.Quantity)
+        }) 
+        .ToList();
+
+        var result = new {
+            TotalSales = totalSales,
+            TotalRevenue = totalRevenue,
+            Products = productRevenue
+        };
+
+        return Ok(result);
     }
 
     // --- Private helpers ---
